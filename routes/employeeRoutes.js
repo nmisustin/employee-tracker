@@ -97,5 +97,21 @@ function addEmployee(body){
         })
     })
 }
+function changeEmployeeRole(body){
+    console.log(body);
+    con.connect( err => {
+        if(err){
+            console.log(err);
+        }
+        const query = (`UPDATE employees SET role_id = ? WHERE id = ?`)
+        const params = [body.role_id, body.id]
+        con.query(query, params, (err, result) => {
+            if(err){
+                console.log(err)
+            }
+            console.log('success!')
+        })
+    })
+}
 
-module.exports = {getAllEmployees, getRoles, getDepartments, addDepartment, addRole, addEmployee}
+module.exports = {getAllEmployees, getRoles, getDepartments, addDepartment, addRole, addEmployee, changeEmployeeRole}
